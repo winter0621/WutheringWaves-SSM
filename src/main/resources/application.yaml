@@ -1,3 +1,5 @@
 spring:
   application:
     name: WutheringWaves-SSM
+  profiles:
+    default: dev
