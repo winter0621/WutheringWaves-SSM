@@ -5,63 +5,100 @@
     <title>用户查询演示</title>
     <style>
         body {
-            max-width: 680px;
-            margin: 40px auto;
-            padding: 0 20px;
-            font-family: Arial, sans-serif;
+            width: 520px;
+            margin: 42px 0 0 82px;
+            font-family: Arial, "Microsoft YaHei", sans-serif;
+            font-size: 14px;
         }
 
-        form, nav {
-            margin: 20px 0;
+        h2 {
+            margin: 0 0 14px;
+            font-size: 18px;
         }
 
-        input, button {
-            padding: 8px;
+        .table-title {
+            margin: 0 0 2px;
+            text-align: center;
         }
 
-        a {
-            margin-right: 12px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        dt {
-            font-weight: bold;
+        th, td {
+            border: 1px solid #d2d2d2;
+            padding: 6px 8px;
+            text-align: left;
         }
 
-        dd {
-            margin: 4px 0 14px;
+        th {
+            width: 125px;
+            background: #f3f3f3;
+        }
+
+        .query-form {
+            margin-top: 26px;
+        }
+
+        input {
+            width: 108px;
+            padding: 2px 4px;
+        }
+
+        button {
+            margin-left: 4px;
+            padding: 2px 7px;
+        }
+
+        .quick-links {
+            margin-top: 14px;
+        }
+
+        .quick-links a {
+            margin-left: 8px;
         }
     </style>
 </head>
 <body>
-<h1 th:text="${message}">Thymeleaf 初始化成功！</h1>
+<h2 th:text="${message}">Thymeleaf 初始化成功！</h2>
 
-<form th:action="@{/demo/user/page}" method="get">
-    <label for="username">用户名：</label>
+<p class="table-title">用户展示信息（不含密码）</p>
+
+<table>
+    <tr>
+        <th>编号</th>
+        <td th:text="${user.id}">1</td>
+    </tr>
+    <tr>
+        <th>登录名</th>
+        <td th:text="${user.username}">alice</td>
+    </tr>
+    <tr>
+        <th>显示名称</th>
+        <td th:text="${user.displayName}">漂泊者 Alice</td>
+    </tr>
+    <tr>
+        <th>角色</th>
+        <td th:text="${user.role}">CUSTOMER</td>
+    </tr>
+    <tr>
+        <th>状态</th>
+        <td th:text="${user.status}">ENABLED</td>
+    </tr>
+</table>
+
+<form class="query-form" th:action="@{/demo/user/page}" method="get">
+    <label for="username">登录名：</label>
     <input id="username" name="username" type="text"
            th:value="${user.username}">
     <button type="submit">查询</button>
 </form>
 
-<nav>
-    <a th:href="@{/demo/user/page(username='alice')}">查询 alice</a>
-    <a th:href="@{/demo/user/page(username='bob')}">查询 bob</a>
-</nav>
-
-<dl>
-    <dt>ID</dt>
-    <dd th:text="${user.id}">1</dd>
-
-    <dt>用户名</dt>
-    <dd th:text="${user.username}">alice</dd>
-
-    <dt>显示名称</dt>
-    <dd th:text="${user.displayName}">漂泊者 Alice</dd>
-
-    <dt>角色</dt>
-    <dd th:text="${user.role}">CUSTOMER</dd>
-
-    <dt>状态</dt>
-    <dd th:text="${user.status}">ENABLED</dd>
-</dl>
+<p class="quick-links">
+    快速切换：
+    <a th:href="@{/demo/user/page(username='alice')}">alice</a>
+    <a th:href="@{/demo/user/page(username='bob')}">bob</a>
+</p>
 </body>
 </html>
